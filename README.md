@@ -62,7 +62,7 @@
 考研复习冲刺阶段，项目暂无进展
 ### 2018/12/16~2018/12/23
 考研
-### 2018/12/23~2018/12/31
+### 2018/12/24~2018/12/31
 ①重新配置安装了Android studio，并根据手机系统版本进行相关配置；
 
 ②阅读研究 https://www.tensorflow.org/tutorials/sequences/audio_recognition 的简单词汇识别资料，并根据相关教程，配置安装tensorflow。
