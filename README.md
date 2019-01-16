@@ -70,9 +70,12 @@
 ### 2018/1/1~2018/1/15
 根据上述教程，使用tensorflow训练模型，如图所示，完成了全部 18000 个训练步，得到如下混淆矩阵：
 ![1](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/1.png)
+
 然后就是创建冻结模型并且对模型进行测试，如图所示：
 ![2](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/2.png)
+
 然后就根据官方教程下载预构建的 Android 演示应用观看效果，目前发生解析包时出现问题的错误，应该需要安装更高级系统进行尝试。
+
 之后在根据教程运行 wav_to_spectrogram 工具，查看音频样本生成的图像类型时，发生如下报错，目前仍在进一步研究教程解决中：
 ![2](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/3.png)
 
