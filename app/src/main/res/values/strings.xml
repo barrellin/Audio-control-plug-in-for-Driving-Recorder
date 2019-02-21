@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AudioControl</string>
+    <string name="accessibility_service_description">允许该程序监听行为</string>>
+</resources>
