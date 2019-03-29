@@ -1,0 +1,235 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-29:12
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc01.aar\48480153d21640473c2d6aecee02c8cd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7b60ea78ea1023d7480722198500ec80\AndroidManifest.xml:2:1-11:12
+MERGED from [org.tensorflow:tensorflow-android:1.13.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\tensorflow-android-1.13.1.aar\dbf4545be995c480435cca3a37f8edcf\AndroidManifest.xml:2:1-8:12
+MERGED from [com.android.support:support-fragment:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc01.aar\1f01fccf83075b6c8158a3c7fa3306a4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc01.aar\51fefdb8cd9a88c4700c782f67769d27\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc01.aar\55fca62c712ff874e7e95b9e856bdd0a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc01.aar\dd995164a277bc9d78630255b17864fb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc01.aar\f5c344c5ab92a8364082ab3e9a7c781b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc01.aar\e7e89dad16f563edfa36d4684edadf44\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc01.aar\e31a27306d59bec0a6de355ddc583f2b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc01.aar\3a05aecfda75c4e9ced4e9826517b583\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc01.aar\73e2a15873f4c681998df45bf788be2d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc01.aar\367a05c555e8b8b3469bb94c37a59267\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc01.aar\b102fbf6d37ccd88c61292c9ef524637\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc01.aar\6f964e9f7f816d0cf419a19bcb42191e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc01.aar\1e95204570483d461fd3f7b1d7d8c9ae\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc01.aar\8c979cc897abc2a5890d41189391895c\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc01.aar\bdd2ddf81a485dc20de0906531336661\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc01.aar\c6b141fba426a363f2b377db720f6e52\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\69b655480f4605496855e9dc3ceb4e85\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc01.aar\399733732b99c81a58bee56172e8edd6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc01.aar\fced5f991b9ae9ee1c18979bdd07d124\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc01.aar\ea92e7a7f270e3659c664a47fcec5d62\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\4d0003a1677bfe651226f97affbd25bd\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\26534a1dcd7c2975a5eeacb07b66d055\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8d88a555445863bc837262212b791a2b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc01.aar\9897f9c7f1e2197993797c3c57745fb8\AndroidManifest.xml:17:1-22:12
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+	package
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:3:5-38
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:1-49:12
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:4:5-75
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-75
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-75
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:4:22-72
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:5:5-70
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-71
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-71
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:5:22-68
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:8:5-80
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-81
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-81
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:8:22-78
+application
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:11:5-47:19
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-27:19
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-27:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7b60ea78ea1023d7480722198500ec80\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7b60ea78ea1023d7480722198500ec80\AndroidManifest.xml:9:5-20
+MERGED from [org.tensorflow:tensorflow-android:1.13.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\tensorflow-android-1.13.1.aar\dbf4545be995c480435cca3a37f8edcf\AndroidManifest.xml:5:5-6:19
+MERGED from [org.tensorflow:tensorflow-android:1.13.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\tensorflow-android-1.13.1.aar\dbf4545be995c480435cca3a37f8edcf\AndroidManifest.xml:5:5-6:19
+MERGED from [com.android.support:support-compat:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc01.aar\8c979cc897abc2a5890d41189391895c\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc01.aar\8c979cc897abc2a5890d41189391895c\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc01.aar\bdd2ddf81a485dc20de0906531336661\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc01.aar\bdd2ddf81a485dc20de0906531336661\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc01.aar\8c979cc897abc2a5890d41189391895c\AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:16:9-35
+	android:label
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:14:9-41
+	android:roundIcon
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:15:9-54
+	android:icon
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:13:9-43
+	android:allowBackup
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:12:9-35
+	android:theme
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:17:9-40
+activity#com.barrel.AudioControl.MainActivity
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:18:9-24:20
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:18:19-70
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:19:13-23:29
+action#android.intent.action.MAIN
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:20:25-66
+category#android.intent.category.LAUNCHER
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:22:17-77
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:22:27-74
+service#com.barrel.AudioControl.MyService
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:25:9-35:19
+	android:label
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:27:13-35
+	android:permission
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:28:13-79
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:26:13-61
+intent-filter#action:name:android.accessibilityservice.AccessibilityService
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:29:13-31:29
+action#android.accessibilityservice.AccessibilityService
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:30:17-92
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:30:25-89
+meta-data#android.accessibilityservice
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:32:13-34:64
+	android:resource
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:34:17-61
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:33:17-60
+service#com.barrel.AudioControl.MySpecialService
+ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:36:9-46:19
+	android:label
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:38:13-35
+	android:permission
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:39:13-79
+	android:name
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml:37:13-68
+uses-sdk
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc01.aar\48480153d21640473c2d6aecee02c8cd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc01.aar\48480153d21640473c2d6aecee02c8cd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7b60ea78ea1023d7480722198500ec80\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\7b60ea78ea1023d7480722198500ec80\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc01.aar\1f01fccf83075b6c8158a3c7fa3306a4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc01.aar\1f01fccf83075b6c8158a3c7fa3306a4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc01.aar\51fefdb8cd9a88c4700c782f67769d27\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc01.aar\51fefdb8cd9a88c4700c782f67769d27\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc01.aar\55fca62c712ff874e7e95b9e856bdd0a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc01.aar\55fca62c712ff874e7e95b9e856bdd0a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc01.aar\dd995164a277bc9d78630255b17864fb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc01.aar\dd995164a277bc9d78630255b17864fb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc01.aar\f5c344c5ab92a8364082ab3e9a7c781b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc01.aar\f5c344c5ab92a8364082ab3e9a7c781b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc01.aar\e7e89dad16f563edfa36d4684edadf44\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc01.aar\e7e89dad16f563edfa36d4684edadf44\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc01.aar\e31a27306d59bec0a6de355ddc583f2b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc01.aar\e31a27306d59bec0a6de355ddc583f2b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc01.aar\3a05aecfda75c4e9ced4e9826517b583\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc01.aar\3a05aecfda75c4e9ced4e9826517b583\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc01.aar\73e2a15873f4c681998df45bf788be2d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc01.aar\73e2a15873f4c681998df45bf788be2d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc01.aar\367a05c555e8b8b3469bb94c37a59267\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc01.aar\367a05c555e8b8b3469bb94c37a59267\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc01.aar\b102fbf6d37ccd88c61292c9ef524637\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc01.aar\b102fbf6d37ccd88c61292c9ef524637\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc01.aar\6f964e9f7f816d0cf419a19bcb42191e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc01.aar\6f964e9f7f816d0cf419a19bcb42191e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc01.aar\1e95204570483d461fd3f7b1d7d8c9ae\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc01.aar\1e95204570483d461fd3f7b1d7d8c9ae\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc01.aar\8c979cc897abc2a5890d41189391895c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc01.aar\8c979cc897abc2a5890d41189391895c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc01.aar\bdd2ddf81a485dc20de0906531336661\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc01.aar\bdd2ddf81a485dc20de0906531336661\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc01.aar\c6b141fba426a363f2b377db720f6e52\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc01.aar\c6b141fba426a363f2b377db720f6e52\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\69b655480f4605496855e9dc3ceb4e85\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\69b655480f4605496855e9dc3ceb4e85\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc01.aar\399733732b99c81a58bee56172e8edd6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc01.aar\399733732b99c81a58bee56172e8edd6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc01.aar\fced5f991b9ae9ee1c18979bdd07d124\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc01.aar\fced5f991b9ae9ee1c18979bdd07d124\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc01.aar\ea92e7a7f270e3659c664a47fcec5d62\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc01.aar\ea92e7a7f270e3659c664a47fcec5d62\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\4d0003a1677bfe651226f97affbd25bd\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\4d0003a1677bfe651226f97affbd25bd\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\26534a1dcd7c2975a5eeacb07b66d055\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\26534a1dcd7c2975a5eeacb07b66d055\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8d88a555445863bc837262212b791a2b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8d88a555445863bc837262212b791a2b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc01.aar\9897f9c7f1e2197993797c3c57745fb8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc01] C:\Users\Barrel\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc01.aar\9897f9c7f1e2197993797c3c57745fb8\AndroidManifest.xml:20:5-44
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		ADDED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Android\project\AudioControl\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
+	android:name
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-76
+uses-permission#android.permission.INTERNET
+ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-64
+meta-data#com.baidu.speech.APP_ID
+ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-20:40
+	android:value
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-37
+	android:name
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-51
+meta-data#com.baidu.speech.API_KEY
+ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:9-23:56
+	android:value
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-53
+	android:name
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-52
+meta-data#com.baidu.speech.SECRET_KEY
+ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:9-26:64
+	android:value
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-61
+	android:name
+		ADDED from [:core] E:\Android\project\AudioControl\core\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-55

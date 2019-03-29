@@ -1,0 +1,23 @@
+#Internal package file, do not edit.
+#Sun Mar 24 20:03:41 CST 2019
+2.base=E\:\\Android\\project\\AudioControl\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+0.path=baidu_speech_grammar.bsg
+2.baseType=DIRECTORY
+3.base=E\:\\Android\\project\\AudioControl\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+2.set=ASSET
+1.path=README.txt
+4.base=E\:\\Android\\project\\AudioControl\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+count=5
+2.path=conv_actions_labels.txt
+4.set=ASSET
+3.path=conv_actions_frozen.pb
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=WakeUp.bin
+1.baseType=DIRECTORY
+0.base=E\:\\Android\\project\\AudioControl\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+0.baseType=DIRECTORY
+3.set=ASSET
+1.base=E\:\\Android\\project\\AudioControl\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+4.baseType=DIRECTORY
+0.set=ASSET

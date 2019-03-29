@@ -5,15 +5,23 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:padding="8dp"
+        android:id="@+id/txtResult" />
+
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="开启服务" />
+        android:text="开启通用语音识别服务" />
 
     <Button
-        android:id="@+id/stop"
+        android:id="@+id/startspecial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="关闭服务" />
+        android:text="开启预设语音识别服务" />
+
 </LinearLayout>

@@ -3,147 +3,314 @@ package com.barrel.AudioControl;
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Handler;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+
+import com.baidu.aip.asrwakeup3.core.recog.MyRecognizer;
+import com.baidu.aip.asrwakeup3.core.recog.listener.IRecogListener;
+import com.baidu.aip.asrwakeup3.core.recog.listener.MessageStatusRecogListener;
+import com.baidu.speech.EventListener;
+import com.baidu.speech.asr.SpeechConstant;
+import com.google.gson.Gson;
+
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
-import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
+import java.util.Map;
 
-import java.util.List;
-
-public class MyService extends AccessibilityService {
-    // Constants that control the behavior of the recognition code and model
-    // settings. See the audio recognition tutorial for a detailed explanation of
-    // all these, but you should customize them to match your training settings if
-    // you are running your own model.
-    private static final int SAMPLE_RATE = 16000;
-    private static final int SAMPLE_DURATION_MS = 1000;
-    private static final int RECORDING_LENGTH = (int) (SAMPLE_RATE * SAMPLE_DURATION_MS / 1000);
-    private static final long AVERAGE_WINDOW_DURATION_MS = 500;
-    private static final float DETECTION_THRESHOLD = 0.70f;
-    private static final int SUPPRESSION_MS = 1500;
-    private static final int MINIMUM_COUNT = 3;
-    private static final long MINIMUM_TIME_BETWEEN_SAMPLES_MS = 30;
-    private static final String LABEL_FILENAME = "file:///android_asset/conv_actions_labels.txt";
-    private static final String MODEL_FILENAME = "file:///android_asset/conv_actions_frozen.pb";
-    private static final String INPUT_DATA_NAME = "decoded_sample_data:0";
-    private static final String SAMPLE_RATE_NAME = "decoded_sample_data:1";
-    private static final String OUTPUT_SCORES_NAME = "labels_softmax";
-
-    // UI elements.
-    private static final String LOG_TAG = MyService.class.getSimpleName();
-
-    // Working variables.
-    short[] recordingBuffer = new short[RECORDING_LENGTH];
-    int recordingOffset = 0;
-    boolean shouldContinue = true;
-    private Thread recordingThread;
-    boolean shouldContinueRecognition = true;
-    private Thread recognitionThread;
-    private final ReentrantLock recordingBufferLock = new ReentrantLock();
-    private TensorFlowInferenceInterface inferenceInterface;
-    private List<String> labels = new ArrayList<String>();
-    private List<String> displayedLabels = new ArrayList<>();
-    private RecognizeCommands recognizeCommands = null;
-
-
+public class MyService extends AccessibilityService
+{
 
     private static final String TAG = "AudioControl";
 
     @Override
-    protected void onServiceConnected() {
+    protected void onServiceConnected()
+    {
         super.onServiceConnected();
         AccessibilityServiceInfo config = new AccessibilityServiceInfo();
-        //配置监听的事件类型为界面变化/点击事件
-        config.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED | AccessibilityEvent.TYPE_VIEW_CLICKED;
+        //配置监听的事件类型为界面变化 点击事件 和窗口内容变化
+
+        config.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED | AccessibilityEvent.TYPE_VIEW_CLICKED | AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED;
         config.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
-        if (Build.VERSION.SDK_INT >= 18) {
+
+        if (Build.VERSION.SDK_INT >= 18)
+            //SDK18 以上可以直接使用ffindAccessibilityNodeInfosByViewId
+        {
             config.flags = AccessibilityServiceInfo.FLAG_INCLUDE_NOT_IMPORTANT_VIEWS;
         }
+
         setServiceInfo(config);
+        //设置AccessibilityService 的相关设置
+
+        Handler handler = new Handler();
+
+        IRecogListener listener = new MessageStatusRecogListener(handler);
+        //百度语音识别SDK MyRecognizer 所需要的相关传参
+
+        myRecognizer = new MyRecognizer(this, new EventListener()
+        {
+            @Override
+            public void onEvent(String s, String s1, byte[] bytes, int i, int i1) {
+
+                //该方法是异步语音识别的回调
+                //System.out.println("===================s: " + s);
+                //System.out.println("===================result: " + s1);
+                //通过观察输出，可以发现
+                //s 是回调类型 partial  finish  exit
+                //这个s1 就是回调的json串
+                //读取出一个s 类型为partial 的s1 :{"results_recognition":["开始识别"],"origin_result":{"corpus_no":6671252030454840276,"err_no":0,"result":{"word":["开始识别"]},"sn":"2a2a8440-ac82-4598-b9d8-48c7ee5504f5","voice_energy":39887},"error":0,"best_result":"开始识别","result_type":"final_result"}
+                //因此，只需要对s1 的json 串进行解析，读取出results_recognition 便可以获得一个识别的结果
+
+                if(s.equals("asr.partial"))
+                {
+                    //System.out.println("========================== in partial");
+                    String json = s1;
+                    //解析json串
+                    Gson gson = new Gson();
+                    AsrPartial result = gson.fromJson(json, AsrPartial.class);
+                    //使用Gson 包来解析json 串
+                    if(result != null && result.results_recognition != null && result.results_recognition.length != 0)
+                    {
+                        System.out.println(result.results_recognition[0]);
+                        //输出一次观察结果是否无误
+                    }
+                    Myresult = result.results_recognition[0];
+                    //用Myresult 存入语音识别的结果，用于判断备用
+
+                    processAfterGetResult(Myresult);
+                    //解析json 之后的操作逻辑，对语音识别结果进行处理，并且使用AccessibilityService来点击屏幕
+                }
+            }
+        });
+    }
+
+    AccessibilityNodeInfo NodeInfoCurrent = null;
+    //此参数用于中转AccessibilityService 所需要的节点信息
+
+    AccessibilityNodeInfo NodePhoto = null;
+    //记录拍照按钮的节点信息
+
+    boolean PhotoFlag = false;
+    //用于记录是否激活设置拍照按钮的功能
+
+    AccessibilityNodeInfo NodeVideo = null;
+    //记录录像按钮的节点信息
+
+    boolean VideoFlag = false;
+    //用于记录是否激活设置录像按钮的功能
+
+    boolean RecordFlag = false;
+    //此参数用于录像按钮模拟点击的逻辑判断
+
+    protected void processAfterGetResult(String Myresult)
+    {
+        //if(NodeInfoCurrent == null)return;
+        //如果当前还没有节点信息，则不进行点击逻辑处理
+
+        if(Myresult == null || Myresult.equals("默认"))return;
+        //若Myresult 为空值，或者为“默认值”，则也不进行点击逻辑处理
+
+        Log.i(TAG, "结果是：“"+ Myresult +"”" );
+        //Log 输出一下识别结果，同时在调试时起到执行到这里的标记的作用
+
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        //Toast 相关使用的初始化操作
+
+        if (Myresult.equals("开始录像") && RecordFlag == false && NodeVideo!=null)
+            //这个RecordFlag 用来判断是否为录音状态，来选择是“开始”还是“停止”
+        {
+            CharSequence text = "识别结果是："+Myresult;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //用Toast 在屏幕中弹出识别结果，用于鉴别识别是否已经成功
+
+            Log.i(TAG, "time for video");
+            //log 输出，说明程序已经执行到这一步骤
+
+            NodeVideo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+            //核心功能，使用AccessibilityService 来进行模拟点击
+
+            RecordFlag = true;
+            //更改flag，实现开始/停止录像的逻辑
+        }
+
+        if (Myresult.equals("停止录像") && RecordFlag == true && NodeVideo!=null)
+            //这个RecordFlag 用来判断是否为录音状态，来选择是“开始”还是“停止”
+        {
+            CharSequence text = "识别结果是：" +Myresult;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //用Toast 在屏幕中弹出识别结果，用于鉴别识别是否已经成功
+
+             Log.i(TAG, "time for video");
+            //log 输出，说明程序已经执行到这一步骤
+
+            NodeVideo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+            //核心功能，使用AccessibilityService 来进行模拟点击
+
+            RecordFlag = false;
+            //更改flag，实现开始/停止录像的逻辑
+        }
+
+        if (Myresult.equals("拍照") && NodePhoto!=null)
+        {
+            CharSequence text = "识别结果是：" +Myresult;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //用Toast 在屏幕中弹出识别结果，用于鉴别识别是否已经成功
+
+            Log.i(TAG, "time for photo");
+            //log 输出，说明程序已经执行到这一步骤
+
+            NodePhoto.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+            //核心功能，使用AccessibilityService 来进行模拟点击
+        }
+
+        if (Myresult.equals("设置拍照"))
+        {
+            CharSequence text = "识别结果是：" +Myresult;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //用Toast 在屏幕中弹出识别结果，用于鉴别识别是否已经成功
+            PhotoFlag = true;
+        }
+
+        if (Myresult.equals("设置录像"))
+        {
+            CharSequence text = "识别结果是：" +Myresult;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //用Toast 在屏幕中弹出识别结果，用于鉴别识别是否已经成功
+            VideoFlag = true;
+        }
+
     }
 
     int i = 0;
+    //此参数用于记录AccessibilityService 设置的监听的事件的发生次数
+
+    public String Myresult = "默认";
+    //此参数为语音识别的结果，在语音识别的回调里面进行赋值，在每次发生AccessibilityService 事件的时候初始化为“默认”
+
+    protected MyRecognizer myRecognizer;
+    //百度语音识别的MyReconizer
+
+    /**
+     * 开始录音。
+     */
+    protected void start()
+    {
+        Map<String, Object> params = new LinkedHashMap<String, Object>();
+        //调起百度语音识别引擎所需要的参数设置
+        params.put(SpeechConstant.ACCEPT_AUDIO_DATA, false);
+        //是否保存音频
+        params.put(SpeechConstant.DISABLE_PUNCTUATION, false);
+        //是否禁用标点符号，在选择输入法模型的前提下生效【不禁用的话，说完一段话，就自带标点符号】
+        params.put(SpeechConstant.ACCEPT_AUDIO_VOLUME, false);
+        //暂时不知道什么意思，应该是语音音量相关的设置
+        params.put(SpeechConstant.PID, 1536);
+        //此PID 对应普通话search 搜索模型，默认，适用于短句，无逗号，可以有语义
+        //params.put(SpeechConstant.VAD_ENDPOINT_TIMEOUT, 0);
+        // 长语音，搭配input输入法模型
+        myRecognizer.start(params);
+        //调起语音识别引擎
+    }
+
+    /**
+     * 开始录音后，手动停止录音。SDK会识别在此过程中的录音。
+     */
+    private void stop()
+    {
+        myRecognizer.stop();
+        //停止语音识别引擎，并执行识别
+    }
+
+    /**
+     * 开始录音后，取消这次录音。SDK会取消本次识别，回到原始状态。
+     */
+    private void cancel()
+    {
+        myRecognizer.cancel();
+        //停止语音识别引擎，并取消识别
+    }
 
     @Override
-    public void onAccessibilityEvent(AccessibilityEvent event) {
+    public void onAccessibilityEvent(AccessibilityEvent event)
+    {
+        Log.i(TAG, "times:"+ i );
+        //输出监听的事件的发生次数，也是该服务的发生次数
 
-        // Load the labels for the model, but only display those that don't start
-        // with an underscore.
-        String actualFilename = LABEL_FILENAME.split("file:///android_asset/")[1];
-        Log.i(LOG_TAG, "Reading labels from: " + actualFilename);
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(getAssets().open(actualFilename)));
-            String line;
-            while ((line = br.readLine()) != null) {
-                labels.add(line);
-                if (line.charAt(0) != '_') {
-                    displayedLabels.add(line.substring(0, 1).toUpperCase() + line.substring(1));
-                }
-            }
-            br.close();
-        } catch (IOException e) {
-            throw new RuntimeException("Problem reading label file!", e);
+        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED && PhotoFlag == true)
+        //当前事件为点击事件时，一般为语音识别结束后的模拟点击
+        {
+            NodePhoto = event.getSource();
+            //节点获取为当前事件的触发源，即工作界面的位置
+
+            Log.i(TAG, "因为点击事件而重置");
+            //Log 输出重置识别结果的事件名
+
+            Myresult = "默认";
+            //重置语音识别的结果为“默认”
+
+            PhotoFlag = false;
+        }
+        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED && VideoFlag == true)
+        //当前事件为点击事件时，一般为语音识别结束后的模拟点击
+        {
+            NodeVideo = event.getSource();
+            //节点获取为当前事件的触发源，即工作界面的位置
+
+            Log.i(TAG, "因为点击事件而重置");
+            //Log 输出重置识别结果的事件名
+
+            Myresult = "默认";
+            //重置语音识别的结果为“默认”
+
+            VideoFlag  = false;
         }
 
-        // Set up an object to smooth recognition results to increase accuracy.
-        recognizeCommands =
-                new RecognizeCommands(
-                        labels,
-                        AVERAGE_WINDOW_DURATION_MS,
-                        DETECTION_THRESHOLD,
-                        SUPPRESSION_MS,
-                        MINIMUM_COUNT,
-                        MINIMUM_TIME_BETWEEN_SAMPLES_MS);
+        start();
+        //调起百度语音识别引擎，该引擎工作与AccessibilityService 是异步的
 
-        // Load the TensorFlow model.
-        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), MODEL_FILENAME);
-
-        AccessibilityNodeInfo nodeInfo = event.getSource();//当前界面的可访问节点信息
-        //startRecording();
-        //startRecognition();
         if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED)
+            //当前事件为窗口界面切换时
         {
             ComponentName componentName = new ComponentName(event.getPackageName().toString(), event.getClassName().toString());
             Log.i(TAG, "当前Activity为：" + componentName.flattenToShortString());
-            if (componentName.flattenToShortString().equals("com.smartcar.carrecorder/.sc_activity.SCCarRecorderAct")){
-                Log.i(TAG, "是这个界面了");
-                startRecording();
-                startRecognition(event);
-                }
+            //if (componentName.flattenToShortString().equals("com.smartcar.carrecorder/.sc_activity.SCCarRecorderAct")){ }
+
+            Log.i(TAG, "因为窗口切换而重置");
+            //Log 输出重置识别结果的事件名
+
+            Myresult = "默认";
+            //重置语音识别的结果为“默认”
         }
-        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED)
+
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED)
+            //当前事件为窗口像素发生变化时，为了时刻让后台语音识别引擎就绪，用该事件来持续刷新，达到不用点击按钮来持续触发语音识别引擎工作的效果
         {
+            ComponentName componentName = new ComponentName(event.getPackageName().toString(), event.getClassName().toString());
+            Log.i(TAG, "当前Activity为：" + componentName.flattenToShortString());
+            //if (componentName.flattenToShortString().equals("com.smartcar.carrecorder/.sc_activity.SCCarRecorderAct")){ }
 
+            Log.i(TAG, "因为窗口变化而重置");
+            //Log 输出重置识别结果的事件名
+
+            Myresult = "默认";
+            //重置语音识别的结果为“默认”
         }
-
+        i++;
     }
 
-    private ActivityInfo tryGetActivity(ComponentName componentName) {
+    private ActivityInfo tryGetActivity(ComponentName componentName)
+    {
         try {
             return getPackageManager().getActivityInfo(componentName, 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -152,193 +319,8 @@ public class MyService extends AccessibilityService {
     }
 
     @Override
-    public void onInterrupt() {
+    public void onInterrupt()
+    {
     }
 
-
-    public synchronized void startRecording() {
-        if (recordingThread != null) {
-            return;
-        }
-        shouldContinue = true;
-        recordingThread =
-                new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                record();
-                            }
-                        });
-        recordingThread.start();
-    }
-
-    public synchronized void stopRecording() {
-        if (recordingThread == null) {
-            return;
-        }
-        shouldContinue = false;
-        recordingThread = null;
-    }
-
-    private void record() {
-        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO);
-
-        // Estimate the buffer size we'll need for this device.
-        int bufferSize =
-                AudioRecord.getMinBufferSize(
-                        SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
-        if (bufferSize == AudioRecord.ERROR || bufferSize == AudioRecord.ERROR_BAD_VALUE) {
-            bufferSize = SAMPLE_RATE * 2;
-        }
-        short[] audioBuffer = new short[bufferSize / 2];
-
-        AudioRecord record =
-                new AudioRecord(
-                        MediaRecorder.AudioSource.DEFAULT,
-                        SAMPLE_RATE,
-                        AudioFormat.CHANNEL_IN_MONO,
-                        AudioFormat.ENCODING_PCM_16BIT,
-                        bufferSize);
-
-        if (record.getState() != AudioRecord.STATE_INITIALIZED) {
-            Log.e(LOG_TAG, "Audio Record can't initialize!");
-            return;
-        }
-
-        record.startRecording();
-
-        Log.v(LOG_TAG, "Start recording");
-
-        // Loop, gathering audio data and copying it to a round-robin buffer.
-        while (shouldContinue) {
-            int numberRead = record.read(audioBuffer, 0, audioBuffer.length);
-            int maxLength = recordingBuffer.length;
-            int newRecordingOffset = recordingOffset + numberRead;
-            int secondCopyLength = Math.max(0, newRecordingOffset - maxLength);
-            int firstCopyLength = numberRead - secondCopyLength;
-            // We store off all the data for the recognition thread to access. The ML
-            // thread will copy out of this buffer into its own, while holding the
-            // lock, so this should be thread safe.
-            recordingBufferLock.lock();
-            try {
-                System.arraycopy(audioBuffer, 0, recordingBuffer, recordingOffset, firstCopyLength);
-                System.arraycopy(audioBuffer, firstCopyLength, recordingBuffer, 0, secondCopyLength);
-                recordingOffset = newRecordingOffset % maxLength;
-            } finally {
-                recordingBufferLock.unlock();
-            }
-        }
-
-        record.stop();
-        record.release();
-    }
-
-    public synchronized void startRecognition(AccessibilityEvent event) {
-        if (recognitionThread != null) {
-            return;
-        }
-        final AccessibilityEvent transport = event;
-        shouldContinueRecognition = true;
-        recognitionThread =
-                new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                recognize(transport);
-                            }
-                        });
-        recognitionThread.start();
-    }
-
-    public synchronized void stopRecognition() {
-        if (recognitionThread == null) {
-            return;
-        }
-        shouldContinueRecognition = false;
-        recognitionThread = null;
-    }
-
-    private void recognize(final AccessibilityEvent event) {
-        Log.v(LOG_TAG, "Start recognition");
-
-        short[] inputBuffer = new short[RECORDING_LENGTH];
-        float[] floatInputBuffer = new float[RECORDING_LENGTH];
-        float[] outputScores = new float[labels.size()];
-        String[] outputScoresNames = new String[] {OUTPUT_SCORES_NAME};
-        int[] sampleRateList = new int[] {SAMPLE_RATE};
-
-        // Loop, grabbing recorded data and running the recognition model on it.
-        while (shouldContinueRecognition) {
-            // The recording thread places data in this round-robin buffer, so lock to
-            // make sure there's no writing happening and then copy it to our own
-            // local version.
-            recordingBufferLock.lock();
-            try {
-                int maxLength = recordingBuffer.length;
-                int firstCopyLength = maxLength - recordingOffset;
-                int secondCopyLength = recordingOffset;
-                System.arraycopy(recordingBuffer, recordingOffset, inputBuffer, 0, firstCopyLength);
-                System.arraycopy(recordingBuffer, 0, inputBuffer, firstCopyLength, secondCopyLength);
-            } finally {
-                recordingBufferLock.unlock();
-            }
-
-            // We need to feed in float values between -1.0f and 1.0f, so divide the
-            // signed 16-bit inputs.
-            for (int i = 0; i < RECORDING_LENGTH; ++i) {
-                floatInputBuffer[i] = inputBuffer[i] / 32767.0f;
-            }
-
-            // Run the model.
-            inferenceInterface.feed(SAMPLE_RATE_NAME, sampleRateList);
-            inferenceInterface.feed(INPUT_DATA_NAME, floatInputBuffer, RECORDING_LENGTH, 1);
-            inferenceInterface.run(outputScoresNames);
-            inferenceInterface.fetch(OUTPUT_SCORES_NAME, outputScores);
-
-            // Use the smoother to figure out if we've had a real recognition event.
-            long currentTime = System.currentTimeMillis();
-            final RecognizeCommands.RecognitionResult result =
-                    recognizeCommands.processLatestResults(outputScores, currentTime);
-
-            new Runnable() {
-            @Override
-                public void run() {
-                // If we do have a new command, highlight the right list entry.
-                    if (!result.foundCommand.startsWith("_") && result.isNewCommand) {
-                        int labelIndex = -1;
-                        for (int i = 0; i < labels.size(); ++i) {
-                            if (labels.get(i).equals(result.foundCommand)) {
-                                labelIndex = i;
-                            }
-                        }
-                        AccessibilityNodeInfo nodeInfo = event.getSource();
-                        ComponentName componentName = new ComponentName(event.getPackageName().toString(), event.getClassName().toString());
-                        List<AccessibilityNodeInfo> list_1 = nodeInfo.findAccessibilityNodeInfosByViewId("com.smartcar.carrecorder:id/photo_capture");
-                        List<AccessibilityNodeInfo> list_2 = nodeInfo.findAccessibilityNodeInfosByViewId("com.smartcar.carrecorder:id/video_recoder");
-                        if (labels.get(i).equals("start"))
-                        {
-                            list_2.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        }
-                        if (labels.get(i).equals("stop"))
-                        {
-                            list_2.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        }
-                        if (labels.get(i).equals("yes"))
-                        {
-                            list_1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        }
-                    }
-                }
-            };
-            try {
-                // We don't need to run too frequently, so snooze for a bit.
-                Thread.sleep(MINIMUM_TIME_BETWEEN_SAMPLES_MS);
-            } catch (InterruptedException e) {
-                // Ignore
-            }
-        }
-
-        Log.v(LOG_TAG, "End recognition");
-    }
 }
-
