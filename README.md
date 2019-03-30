@@ -19,6 +19,8 @@
 
 简单词汇识别 https://www.tensorflow.org/tutorials/sequences/audio_recognition
 
+百度语音识别 http://ai.baidu.com/tech/speech/asr
+
 ## 项目完成计划
 
 因复习考研，考研于12月底结束，预计一月份开始进行毕业设计，利用假期时间完成，预计使用5-8周：
@@ -79,4 +81,78 @@
 之后在根据教程运行 wav_to_spectrogram 工具，查看音频样本生成的图像类型时，发生如下报错，目前仍在进一步研究教程解决中：
 ![2](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/3.png)
 
->>>>>>> 20575c1e359c6d62ebb0dd49b43407fa0c461989
+### 2018.1.16~2018.2.22
+
+考虑到了需要对屏幕进行模拟点击，我进行了相关的资料调查，项目的实现目标是需要根据语音进行反馈的模拟点击，那么就是要实现一个“声控”的“按键精灵”。当前需要实现模拟点击的话，主要可以通过三种方法：①AccessibilityService辅助类；②Instrumentation方法；③adb shell命令的方法。其中，AccessibilityService辅助类是安卓系统设计出来帮助残障人士使用手机的，优点是不root可用，缺点是要找到页面空间进行模拟点击；Instrumentation方法虽然可以点击屏幕上的任何位置，在如今第三方Rom横行的今天，基本上是不可能获取到INJECT_EVENTS这一个权限的；adb shell命令的话，需要root过的手机。为了app的通用性考虑，我选择使用AccessibilityService辅助类来实现模拟点击功能。
+
+考虑到之后可能要测试多款行车记录仪软件，我对accessibility.xml进行相关配置的时候，没有限定针对某一个特定的app，如图。
+
+![4](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/4.png)
+
+![5](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/5.png)
+
+然后就是选定测试软件了，我从华为应用市场上随机挑选了一个行车记录仪app来进行测试，如图。
+
+![6](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/6.png)
+
+选定一款测试软件之后，使用Androidstudio自带的功能获取它的包名和控件名，如图。
+
+
+![7](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/7.png)
+
+在tensorflowdemo的speechactivity中，通过观察录音的线程和识别的线程的代码，如图所示：
+
+![9](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/9.png)
+
+![10](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/10.png)
+
+可以知道，录音时，数据流是连续不断的，而每次拷贝的录音数据和上一次是可能存在重复的，这保证了录音数据的延续性，这样的处理基本能保证捕捉到关键数据。那么只要在service中相应的启动录音的线程和识别的线程，并且加以识别，是可以读取出对应识别的结果的标签的，如图所示：
+
+![12](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/12.png)
+
+因为tensorflow训练好的模型给出的label比较有限，不妨先简单的把start和stop的标签用于进行对录制视屏按钮的虚拟点击，把yes的标签用于对拍摄按钮的虚拟点击，这样就可以实现了通过语音的service实现对一个app的按钮的语音控制的功能。
+
+tensorflow给的例子speechactivity是在一个activity中进行录音以及相关识别，而为了实现模拟点击，我需要把这一段录音以及识别转移到service中，目前service已经能开始进行录音与识别，但在执行过程中会发生报错，正在调试。
+
+![8](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/8.png)
+
+### 2018.2.23~2018.3.29
+改用百度语音识别服务，重编程序逻辑，如下所示：
+
+①MainActivity的逻辑实现
+MainActivity的逻辑流程图如下图所示：
+
+![31](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/31.jpg)
+
+由于本文设计是需要辅助功能的，因此，若是需要用户自行打开设置-辅助功能菜单去设置辅助功能的话，交互性会变差，与做一个方便的插件的初衷背道而驰，因此，在点击事件发生的时候，不是直接开启服务，而是先判断辅助功能是否已经打开，若未打开，则应该自动跳转至手机的系统设置-辅助功能目录下，等待用户授权。用户授权之后，则可以开始相对应的辅助功能服务，发送相应的startService事件。
+
+
+
+②MySpecialService的逻辑实现
+MySpecialService的逻辑流程图如下图所示：
+
+![32](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/32.jpg)
+
+MySpecialService，对应的是“预设语音识别服务”，为什么说是“预设”的呢，这是因为该服务采用的是传统的Accessibility Service使用方法，即在代码中直接使用对应的view的id来进行节点查找以及后续的模拟点击。这种方法，语音识别后的模拟点击的控件不是用户可以修改的，该“预设语音识别服务”功能对应的app，是奇点行车记录仪，为在网上随机挑选的一款简易行车记录仪app。
+在配置该Accessibility Service的时候，监听的系统事件定义为窗口界面变化事件、点击事件、以及窗口像素变化事件。其中，监听窗口界面变化事件是用于当程序切换到行车记录仪的主界面时，获取当前界面信息并进行对比，若是奇点行车记录仪的主界面，则记录节点信息为当前系统事件的触发源，即节点信息在记录为行车记录仪的主界面，那么，在后续进行通过id寻找控件时，能保证两个控件均为记录下来的节点信息的孩子，即确保能寻找到控件。
+每次系统监听到设定的系统事件的时候，变回开启并且重置系统服务，初始化各项参数，点击事件的监听可以确保每次语音识别以及模拟点击之后，让整个后台服务回到就绪的状态，准备好下一次的监听。而考虑到，百度语音识别服务调起之后，若是长时间无声音或者识别出来的词语无对应操作，则语音识别服务就会停止，并且语音识别服务本身是无法调起下一次的语音识别服务的。为了本文设计能在后台保持语音监听状态，采用了监听窗口像素变化事件。因为前台软件是行车记录仪app，是在调用摄像头的，因此，窗口内的像素是一定发生变化的，通过监听窗口像素变化事件，则可以保持百度语音识别服务一直处于就绪状态，同时，不断的触发服务，释放资源，达到了一个良好的持续监听的效果。
+在Accessibility Service配置完毕之后，就要开始编写百度语音识别服务的回调函数了。其默认的回调函数，是在logcat处输出语音识别的结果。因此，在override百度语音的回调函数onEvent的时候，我们可以直接获取到识别结果的json串，通过对json串进行处理，提取出识别结果，然后根据识别结果进行对应的操作就可以了。
+提取出识别结果，若为“拍照”，则用上文中提到的设置好的节点信息，通过id photo_capture获取到拍照按钮的控件节点信息，然后使用Accessibility Service的ACTION_CLICK，就可以模拟点击到拍照按钮了，点击完后，释放资源，防止下一次识别出错。
+若为“开始录像”或者“停止录像”则使用相同的方法，通过id video_recoder获取到录像按钮的节点信息，再根据一个boolean flag来确定是“开始录像”还是“停止录像”生效就可以了。同样的，模拟点击后释放资源。
+至此，“预设语音识别服务”的基础功能就设计好了。
+
+③MyService的逻辑实现
+MyService的辅助功能部分的逻辑流程图如下图所示：
+
+![331](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/331.jpg)
+
+MyService对应的是“通用语音识别服务”，顾名思义，与“预设语音识别服务”不同的是，该服务是不需要事前知道控件id的，是针对“预设语音识别服务”的功能强化版，除了奇点行车记录仪app以外，还可以对应其他的不同的简易行车记录仪app使用。
+因为需要适用于多种不同的行车记录仪app，就不能像“预设”服务那样，通过监听界面窗口变化来对根节点信息直接赋值了，因为不清楚目标行车记录仪界面activity的id。因此，这里使用监听点击事件来解决虚招了两个boolean flag，拍照按钮设置对应的是PhotoFlag ，录像按钮设置对应的是VideoFlag，这两个flag只有在语音识别到“设置拍照”和“设置录像”的时候才会分别变为真值。然后在监听到了系统点击事件，并且对应的flag为真值时，意味着用户在设置拍照和录像的对应的按钮，因此，只需要把这个时候传入的事件的触发源（即被点击的按钮本身）记录为对应的信息节点就可以了。这样就实现了用户自定义“拍照”和“录像”按钮的效果。同时，在设置完后，要立刻把对应的flag设置为false，放置设置好的按钮因为监听到按钮点击事件而被再设置。
+除开设置按钮的功能以外，保持百度语音识别服务就绪，随时可以进行语音识别的方法与“预设语音识别服务”是一样的，都是通过了监听窗口像素变化事件实现了，就不多作叙述了。
+
+![332](https://github.com/barrellin/Audio-control-plug-in-for-Driving-Recorder/blob/master/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/332.jpg)
+
+MyService的语音识别部分的逻辑流程图如上图所示：因为本文设计在使用“通用语音识别服务”功能的时候，一开始，拍照按钮的节点信息和录像按钮的节点信息都为空，因此需要特别小心，如果调出了一个空的节点信息来进行模拟点击的话，程序是会直接崩溃的，可是又需要“设置拍照”和“设置录像”的语音识别功能，因此一开始如果识别到“拍照”、“开始录像”和“停止录像”的时候，需要直接返回。然后，如上文所述，在识别到“设置拍照”和“设置录像”的时候，就需要把对应的boolean flag设置为true，然后由点击对应的按钮来记录对应的节点信息，这之后就可以正常使用“拍照”和“录像”功能了。
+值得一提的是因为“预设语音识别服务”记录的节点信息为按钮所在的activity的信息，而这里直接记录的是对应按钮的节点信息，因此，调用ACTION_CLICK的时候就不需要通过view的id来找按钮的节点信息了。这也是本功能可以适用于多款行车记录仪的原因。
+
+同时，在写好程序的同时，完成了论文的初稿。
