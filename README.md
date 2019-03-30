@@ -21,6 +21,14 @@
 
 百度语音识别 http://ai.baidu.com/tech/speech/asr
 
+安卓辅助功能 https://developer.android.google.cn/reference/android/accessibilityservice/AccessibilityService
+
+## 项目代码量
+
+项目使用语言为JAVA
+辅助功能实现 816行
+百度语音整合 2741行
+
 ## 项目完成计划
 
 因复习考研，考研于12月底结束，预计一月份开始进行毕业设计，利用假期时间完成，预计使用5-8周：
